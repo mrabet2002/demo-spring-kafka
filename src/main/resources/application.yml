@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: demo-spring-kafka
+  cloud:
+    stream:
+      bindings:
+        pageEventConsumer-in-0:
+          destination: R1
+        pageEventSupplier-out-0:
+          destination: R2
+        kStreamFunction-in-0:
+          destination: R2
+        kStreamFunction-out-0:
+          destination: R3
+      poller:
+        fixed-delay: 100
+      kafka:
+        streams:
+          binder:
+            configuration:
+              commit:
+                interval:
+                  ms: 1000
+    function:
+      definition: pageEventConsumer;pageEventSupplier;kStreamFunction
